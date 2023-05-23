@@ -27,9 +27,9 @@ env:
 
 on:
   push:
-    branches: [master, staging, port-to-md]
+    branches: [master, staging, master-magdeburg]
   pull_request:
-    branches: [master, staging, port-to-md]
+    branches: [master, staging, master-magdeburg]
     paths:
       - '.nvmrc'
       - 'src/**/*'
