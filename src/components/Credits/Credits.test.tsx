@@ -5,52 +5,24 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from '../../assets/theme';
 
 describe('component Credits', () => {
-  test('should render the CityLAB logo', () => {
+  test('should render the Code for Magdeburg logo', () => {
     render(
       <ThemeProvider theme={theme}>
         <Credits />
       </ThemeProvider>
     );
-    const citylabImage = screen.getByAltText(/Logo Citylab/i);
-    expect(citylabImage).toBeInTheDocument();
-    expect(citylabImage.getAttribute('src')).toContain('citylab-logo.svg');
+    const codeForMagdeburgImage = screen.getByAltText(/Logo Code for Magdeburg/i);
+    expect(codeForMagdeburgImage).toBeInTheDocument();
+    expect(codeForMagdeburgImage.getAttribute('src')).toContain('code-for-md-logo.svg');
   });
-  test('should render the Technologiestiftung logo', () => {
+  test('should render the Netz39 logo', () => {
     render(
       <ThemeProvider theme={theme}>
         <Credits />
       </ThemeProvider>
     );
-    const tsbImage = screen.getByAltText(/Logo Technologiestiftung Berlin/i);
-    expect(tsbImage).toBeInTheDocument();
-    expect(tsbImage.getAttribute('src')).toContain('tsb-logo-coloured.svg');
-  });
-  test('should render the Berlin logo', () => {
-    render(
-      <ThemeProvider theme={theme}>
-        <Credits />
-      </ThemeProvider>
-    );
-    const berlinImage = screen.getByAltText(/Logo Berlin/i);
-    expect(berlinImage).toBeInTheDocument();
-    expect(berlinImage.getAttribute('src')).toContain('berlin.svg');
-  });
-  test('should render the "Ein Projekt der" label', () => {
-    render(
-      <ThemeProvider theme={theme}>
-        <Credits />
-      </ThemeProvider>
-    );
-    const einProjektDerLabel = screen.getByText(/Ein Projekt der/i);
-    expect(einProjektDerLabel).toBeInTheDocument();
-  });
-  test('should render the "Gefördert durch" label', () => {
-    render(
-      <ThemeProvider theme={theme}>
-        <Credits />
-      </ThemeProvider>
-    );
-    const gefoerdertDurchLabel = screen.getByText(/Gefördert durch/i);
-    expect(gefoerdertDurchLabel).toBeInTheDocument();
+    const netz39Image = screen.getByAltText(/Logo Netz39 e.V./i);
+    expect(netz39Image).toBeInTheDocument();
+    expect(netz39Image.getAttribute('src')).toContain('netz39-logo.svg');
   });
 });

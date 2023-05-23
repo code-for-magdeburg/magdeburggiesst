@@ -29,7 +29,7 @@ const SlackButtonLink = styled.a`
 
 export const SlackButton: FC = ({ children = 'Community beitreten' }) => (
   <SlackButtonLink
-    href='https://join.slack.com/t/giessdenkiez/shared_invite/zt-e3et281u-xON4UmBZpKavzDRkw5HmCQ'
+    href='https://join.slack.com/t/magdeburggiesst/shared_invite/zt-1tf5i2z3k-mTmk_PUBEOWuNWzDSNoH4w'
     target='_blank'
     rel='noopener nofollow'
   >

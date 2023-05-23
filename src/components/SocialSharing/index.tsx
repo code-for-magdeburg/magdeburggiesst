@@ -30,10 +30,10 @@ const SocialSharing: FC = () => {
     <StyledContainer>
       <span>Teilen:</span>
       <ButtonsContainer>
-        <FacebookShareButton url='https://www.giessdenkiez.de/'>
+        <FacebookShareButton url='https://magdeburg-giesst.de/'>
           <FacebookIcon size={36} round />
         </FacebookShareButton>
-        <TwitterShareButton url='https://www.giessdenkiez.de/'>
+        <TwitterShareButton url='https://magdeburg-giesst.de/'>
           <TwitterIcon size={36} round />
         </TwitterShareButton>
       </ButtonsContainer>

@@ -23,6 +23,7 @@ jobs:
         uses: technologiestiftung/giessdenkiez-de-osm-pumpen-harvester@v1.4.0
         with:
           outfile-path: 'public/data/pumps.geojson'
+          query: '[out:json][bbox:52.0124,11.4100, 52.2497,11.8330];(node["man_made"="water_well"];);out;>;out;'
       # Use the output from the `pumps` step
       - name: File output
         run: echo "The file was written to ${{ steps.pumps.outputs.file }}"

@@ -12,23 +12,23 @@ export const MapLayout: FC<{ treeId?: string | null }> = ({
   return (
     <>
       <Head>
-        <title>Gieß den Kiez | CityLAB Berlin</title>
+        <title>MAGDEBURG GIESST | Code for Magdeburg</title>
         <meta
           name='viewport'
           content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
         />
         <link rel='icon' type='image/x-icon' href='/images/favicon.ico' />
-        <meta name='title' content='Gieß den Kiez | CityLAB Berlin' />
+        <meta name='title' content='MAGDEBURG GIESST | Code for Magdeburg' />
         <meta
           name='description'
-          content='Die Berliner Stadtbäume leiden unter Trockenheit und Du kannst ihnen helfen!'
+          content='Die Magdeburger Stadtbäume leiden unter Trockenheit und Du kannst ihnen helfen!'
         />
         <meta property='og:url' content='<%= domain %>/' />
         <meta property='og:type' content='website' />
-        <meta property='og:title' content='Gieß den Kiez | CityLAB Berlin' />
+        <meta property='og:title' content='MAGDEBURG GIESST | Code for Magdeburg' />
         <meta
           property='og:description'
-          content='Die Berliner Stadtbäume leiden unter Trockenheit und Du kannst ihnen helfen!'
+          content='Die Magdeburger Stadtbäume leiden unter Trockenheit und Du kannst ihnen helfen!'
         />
         <meta
           property='og:image'
@@ -36,16 +36,16 @@ export const MapLayout: FC<{ treeId?: string | null }> = ({
         />
         <meta
           property='og:site_name'
-          content='Gieß den Kiez | CityLAB Berlin'
+          content='MAGDEBURG GIESST | Code for Magdeburg'
         />
         <meta name='twitter:card' content='summary' />
-        <meta name='twitter:site' content='@citylabberlin' />
-        <meta name='twitter:creator' content='@citylabberlin' />
+        <meta name='twitter:site' content='@codeformd' />
+        <meta name='twitter:creator' content='@codeformd' />
         <meta name='twitter:url' content='<%= domain %>/' />
-        <meta name='twitter:title' content='Gieß den Kiez | CityLAB Berlin' />
+        <meta name='twitter:title' content='MAGDEBURG GIESST | Code for Magdeburg' />
         <meta
           name='twitter:description'
-          content='Die Berliner Stadtbäume leiden unter Trockenheit und Du kannst ihnen helfen!'
+          content='Die Magdeburger Stadtbäume leiden unter Trockenheit und Du kannst ihnen helfen!'
         />
         <meta
           name='twitter:image'
