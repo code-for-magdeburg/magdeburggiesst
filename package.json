@@ -1,7 +1,7 @@
 {
-	"name": "@tsb/giessdenkiez-de",
+	"name": "@code-for-magdeburg/magdeburggiesst",
 	"version": "2.0.0",
-	"description": "Source repo for [giessdenkiez.de](https://www.giessdenkiez.de)",
+	"description": "Source repo for [magdeburg-giesst.de](https://magdeburg-giesst.de)",
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
@@ -17,7 +17,7 @@
 		"build-storybook": "build-storybook -s ./public"
 	},
 	"keywords": [],
-	"author": "Technologiestiftung Berlin",
+	"author": "Code for Magdeburg",
 	"contributors": [
 		"Fabian Dinklage",
 		"Fabian Morón Zirfas",
@@ -106,10 +106,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/technologiestiftung/giessdenkiez-de.git"
+		"url": "git+https://github.com/code-for-magdeburg/magdeburggiesst.git"
 	},
 	"bugs": {
-		"url": "https://github.com/technologiestiftung/giessdenkiez-de/issues"
+		"url": "https://github.com/code-for-magdeburg/magdeburggiesst/issues"
 	},
-	"homepage": "https://github.com/technologiestiftung/giessdenkiez-de#readme"
+	"homepage": "https://github.com/code-for-magdeburg/magdeburggiesst#readme"
 }
