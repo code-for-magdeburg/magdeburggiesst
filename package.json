@@ -89,6 +89,7 @@
 		"focus-trap-react": "8.9.2",
 		"history": "4.10.1",
 		"next": "12.3.2",
+		"pg": "^8.11.0",
 		"rc-slider": "9.7.5",
 		"react": "17.0.2",
 		"react-day-picker": "8.0.4",
