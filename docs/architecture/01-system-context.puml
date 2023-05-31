@@ -1,0 +1,23 @@
+@startuml System Context
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_LANDSCAPE()
+
+System(system, "Gieß den Kiez", "Watering trees in Berlin")
+
+Person(user, "User")
+Person(admin, "Admin")
+
+SystemDb_Ext(dwd, "DWD")
+SystemDb_Ext(osm, "OSM")
+SystemDb_Ext(tree_data, "Tree Data")
+
+Rel_R(user, system, "View, water and adopt trees")
+Rel_R(admin, system, "Update tree data")
+Rel_R(system, dwd, "Collect rain data")
+Rel_R(system, osm, "Collect pumps")
+Rel_R(system, tree_data, "Collect tree data")
+
+SHOW_LEGEND()
+
+@enduml

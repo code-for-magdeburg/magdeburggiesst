@@ -1,0 +1,39 @@
+@startuml Containers
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Person(user, "User")
+Person(developer, "Dev")
+
+System_Boundary(system, "Gieß den Kiez") {
+    Container(web_app, "Website", "ReactJs")
+    Container(api, "Postgres API", "Next.js")
+    Container(dwd_harvester, "DWD Harvester", "Python")
+    Container(osm_harvester, "OSM Harvester", "Python")
+    Container(tree_data_collector, "Tree Data Collector")
+    ContainerDb(trees_database, "Trees Database", "Postgres, Supabase")
+    ContainerDb_Ext(s3, "Weather Data", "AWS S3 Bucket")
+    System_Ext(mapbox, "Trees Geo Data", "Mapbox")
+}
+
+System_Ext(dwd, "Deutscher Wetterdienst")
+System_Ext(osm, "OpenStreetMap")
+ContainerDb_Ext(tree_data, "Trees Data")
+
+Rel_R(user, web_app, "Uses", "HTTPS")
+Rel(developer, tree_data_collector, "Manages and runs")
+Rel(web_app, api, "Query and update data", "JSON/HTTPS")
+Rel(web_app, s3, "Load weather data", "CSV/HTTPS")
+Rel(osm_harvester, web_app, "Provide pumps data", "JSON/GIT")
+Rel_R(osm_harvester, osm, "Query pumps data", "JSON/Overpass API")
+Rel(api, trees_database, "Query and update data", "SQL/TCP")
+Rel(web_app, mapbox, "Load trees geo data", "JSON/Mapbox GL")
+Rel(dwd_harvester, s3, "Upload weather data", "CSV/HTTPS")
+Rel(dwd_harvester, trees_database, "Update weather data", "SQL/TCP")
+Rel(dwd_harvester, dwd, "Download weather data", "ASC/HTTPS")
+Rel(dwd_harvester, mapbox, "Upload trees geo data", "CSV/HTTPS")
+Rel_R(tree_data_collector, trees_database, "Sync tree data", "SQL/TCP")
+Rel(tree_data_collector, tree_data, "Fetch tree data")
+
+SHOW_LEGEND()
+
+@enduml

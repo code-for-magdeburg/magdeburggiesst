@@ -1,0 +1,24 @@
+@startuml DWD Harvester
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+Container_Boundary(dwd_harvester, "DWD Harvester") {
+    Component(harvest_script, "harvester.py", "Python")
+    Component(prepare_script, "prepare.py", "Python", "Creates a buffer shapefile from a city shapefile")
+    Component(grid_script, "grid.py", "Python", "Initializes geometry grid based on buffer shapefile")
+}
+
+ContainerDb(trees_database, "Trees Database", "Postgres, Supabase")
+ContainerDb_Ext(s3, "Weather Data", "AWS S3 Bucket")
+System_Ext(mapbox, "Trees Geo Data", "Mapbox")
+System_Ext(dwd, "Deutscher Wetterdienst")
+
+Rel(harvest_script, s3, "Upload weather data", "CSV/HTTPS")
+Rel(harvest_script, trees_database, "Get last update timestamp, Update weather data", "SQL/TCP")
+Rel(harvest_script, dwd, "Download recent weather data", "ASC/HTTPS")
+Rel(harvest_script, mapbox, "Upload trees geo data", "CSV/HTTPS")
+
+Rel(grid_script, trees_database, "Insert geometry data", "SQL/TCP")
+
+@enduml
