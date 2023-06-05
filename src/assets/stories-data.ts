@@ -2,8 +2,8 @@ import { Tree } from '../common/interfaces';
 
 export const treeData: Tree = {
   id: '_w6utdqycq',
-  lat: '13.42081',
-  lng: '52.50314',
+  lat: '52.50314',
+  lng: '13.42081',
   artdtsch: 'Baum-Hasel',
   artbot: 'Corylus colurna',
   gattungdeutsch: 'HASEL',
