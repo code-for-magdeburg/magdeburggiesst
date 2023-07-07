@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Aggregate rain data from DWD radolan
     steps:
+      - name: Get the source
+        uses: actions/checkout@v3
       - name: build the harvester
         run: cd dwd-harvester/harvester && docker build --tag code-for-magdeburg/magdeburggiesst-dwd-harvester:test .
       - name: run the harvester
