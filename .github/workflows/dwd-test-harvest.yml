@@ -2,6 +2,8 @@ name: dwd harvester (test mode)
 
 on:
   push:
+    paths:
+      - 'dwd-harvester/**'
     branches:
       - master
       - staging
