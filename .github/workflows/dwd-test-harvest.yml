@@ -5,12 +5,12 @@ on:
     branches:
       - master
       - staging
-      - port-to-md
+      - master-magdeburg
   pull_request:
     branches:
       - master
       - staging
-      - port-to-md
+      - master-magdeburg
   workflow_dispatch:
 
 env:
