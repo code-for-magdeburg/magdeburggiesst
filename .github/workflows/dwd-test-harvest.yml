@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Get the source for the api master-magdeburg
         uses: actions/checkout@v3
-        if: github.event.pull_request.base.ref == 'port-to-md' || github.ref == 'refs/heads/port-to-md'
+        if: github.event.pull_request.base.ref == 'master-magdeburg' || github.ref == 'refs/heads/master-magdeburg'
         with:
           repository: code-for-magdeburg/magdeburggiesst-postgres-api
           path: api
