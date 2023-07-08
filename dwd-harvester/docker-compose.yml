@@ -1,0 +1,47 @@
+version: "3.4"
+
+services:
+  harvester:
+    build:
+      context: ./harvester
+      dockerfile: Dockerfile
+#    depends_on:
+#      - postgres
+    volumes:
+      - ./harvester:/app
+    env_file: ./harvester/.env
+    environment:
+      # PG_DB: trees
+      # PG_SERVER: postgres
+      # PG_PORT: 5432
+      # PG_USER: fangorn
+      # PG_PASS: ent
+      # SUPABASE_PROJECT_ID=
+      # SUPABASE_ACCESS_TOKEN=
+      # SUPABASE_BUCKET_NAME=weather_data
+      # bygiessdenkiez-devoverwriting these here we make sure
+      # we dont push all the time to mapbox 💵
+      MAPBOXUSERNAME: "123"
+      MAPBOXTOKEN: "456"
+      MAPBOXTILESET: "xyz"
+      MAPBOXLAYERNAME: "abc"
+
+      OUTPUT: "True"
+      LOGGING: INFO
+    # By overtwriting the command we can start the container
+    # move into it (docker exec -it {CONTAINER ID} /bin/sh
+    # and execute or debug all the scripts manually
+    command: ["tail", "-f", "/dev/null"]
+
+#  postgres:
+#    container_name: "postgres"
+#    image: "dwd-postgres"
+#    build:
+#      context: ./dev-db
+#      dockerfile: Dockerfile
+#    environment:
+#      POSTGRES_USER: fangorn
+#      POSTGRES_DB: trees
+#      POSTGRES_PASSWORD: ent
+#    ports:
+#      - "5432:5432"

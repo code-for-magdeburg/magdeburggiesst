@@ -1,0 +1,35 @@
+name: DWD Radolan Harvester (prod)
+
+on:
+  workflow_dispatch: {}
+  repository_dispatch:
+    types: [radolan_cron]
+
+jobs:
+  rain:
+    environment: production
+    runs-on: ubuntu-latest
+    name: Aggregate rain data from DWD radolan
+    steps:
+      - name: Get the source
+        uses: actions/checkout@v3
+      - name: build the harvester
+        run: cd dwd-harvester/harvester && docker build --tag code-for-magdeburg/magdeburggiesst-dwd-harvester:test .
+      - name: run the harvester
+        run: >
+          docker run --env PG_SERVER=${{ vars.PG_SERVER }} \
+                     --env PG_DB=${{ vars.PG_DB }} \
+                     --env PG_PORT=${{ vars.PG_PORT }} \
+                     --env PG_USER=${{ vars.PG_USER }} \
+                     --env PG_PASS=${{ secrets.PG_PASS }} \
+                     --env SUPABASE_PROJECT_ID=${{ vars.SUPABASE_PROJECT_ID }} \
+                     --env SUPABASE_ACCESS_TOKEN=${{ secrets.SUPABASE_ACCESS_TOKEN }} \
+                     --env SUPABASE_BUCKET_NAME=${{ vars.SUPABASE_DATA_ASSETS_BUCKET }} \
+                     --env MAPBOXTOKEN=${{ secrets.MAPBOXTOKEN }} \
+                     --env MAPBOXUSERNAME=${{ vars.MAPBOXUSERNAME }} \
+                     --env MAPBOXTILESET=${{ vars.MAPBOXTILESET }} \
+                     --env MAPBOXLAYERNAME=${{ vars.MAPBOXLAYERNAME }} \
+                     --env LOGGING='INFO' \
+                     --env OUTPUT=True \
+                     --network host \
+                     code-for-magdeburg/magdeburggiesst-dwd-harvester:test  
