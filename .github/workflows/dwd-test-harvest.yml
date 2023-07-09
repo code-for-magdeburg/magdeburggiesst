@@ -1,4 +1,4 @@
-name: dwd harvester (test mode)
+name: DWD harvester (test mode)
 
 on:
   push:
