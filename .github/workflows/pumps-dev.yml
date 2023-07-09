@@ -14,7 +14,7 @@ jobs:
       - name: Get the source
         uses: actions/checkout@v3
       - name: build the harvester
-        run: cd pumps-harvester/harvester && docker build --tag "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" .
+        run: cd pumps-harvester && docker build --tag "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" .
       - name: run the harvester
         run: docker run -v /tmp:/tmp "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" /tmp/out.json
       - name: File output
