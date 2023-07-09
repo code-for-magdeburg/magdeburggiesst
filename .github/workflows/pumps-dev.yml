@@ -27,7 +27,7 @@ jobs:
               -X PUT \
               -H "Authorization: Bearer ${{ secrets.SUPABASE_ACCESS_TOKEN }}" \
               -H "Content-Type: application/geo+json" \
-              -d "@${{ steps.pumps.outputs.file }}" \
+              -d /tmp/out.json \
               ${{ vars.SUPABASE_URL }}/storage/v1/object/${{ vars.SUPABASE_DATA_ASSETS_BUCKET }}/pumps.geojson)
             if [ "$putStatusCode" = "200" ]; then
               echo "Uploading to Supabase successful"
@@ -40,7 +40,7 @@ jobs:
               -X POST \
               -H "Authorization: Bearer ${{ secrets.SUPABASE_ACCESS_TOKEN }}" \
               -H "Content-Type: application/geo+json" \
-              -d "@${{ steps.pumps.outputs.file }}" \
+              -d /tmp/out.json \
               ${{ vars.SUPABASE_URL }}/storage/v1/object/${{ vars.SUPABASE_DATA_ASSETS_BUCKET }}/pumps.geojson)
             if [ "$postStatusCode" = "200" ]; then
               echo "Uploading to Supabase successful"
