@@ -5,6 +5,10 @@ on:
 #  repository_dispatch:
 #    types: [pumps_cron]
 
+env:
+  # Query Magdeburg trees
+  QUERY: '[out:json][bbox:52.0124,11.4100, 52.2497,11.8330];(node["man_made"="water_well"];);out;>;out;'
+
 jobs:
   pumps:
     environment: development
@@ -16,6 +20,6 @@ jobs:
       - name: build the harvester
         run: cd pumps-harvester && docker build --tag "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" .
       - name: run the harvester
-        run: docker run -v /tmp:/tmp "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" /tmp/out.json
+        run: docker run -v /tmp:/tmp "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" /tmp/out.json -q $QUERY
       - name: File output
         run: cat /tmp/out.json
