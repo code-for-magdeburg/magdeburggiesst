@@ -14,7 +14,7 @@ jobs:
       - name: Get the source
         uses: actions/checkout@v3
       - name: build the harvester
-        run: cd dwd-harvester/harvester && docker build --tag code-for-magdeburg/magdeburggiesst-dwd-harvester:test .
+        run: cd dwd-harvester/harvester && docker build --tag "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" .
       - name: run the harvester
         run: >
           docker run --env PG_SERVER=${{ vars.PG_SERVER }} \
@@ -32,4 +32,4 @@ jobs:
                      --env LOGGING='INFO' \
                      --env OUTPUT=True \
                      --network host \
-                     code-for-magdeburg/magdeburggiesst-dwd-harvester:test  
+                     "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}"  
