@@ -62,7 +62,7 @@ jobs:
         with:
           version: 1.33.0
       - name: build the harvester
-        run: cd dwd-harvester/harvester && docker build --tag code-for-magdeburg/magdeburggiesst-dwd-harvester:test .
+        run: cd dwd-harvester/harvester && docker build --tag "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" .
       - name: Start the api
         run: cd api && supabase start && cd ..
       - name: run the harvester
@@ -80,6 +80,6 @@ jobs:
                      --env LOGGING \
                      --env OUTPUT \
                      --network host \
-                     code-for-magdeburg/magdeburggiesst-dwd-harvester:test
+                     "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}"
       - name: stop the api
         run: cd api && supabase stop && cd ..
