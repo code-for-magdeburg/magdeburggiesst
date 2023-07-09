@@ -1,4 +1,4 @@
-name: dwd harvester (test mode)
+name: DWD harvester (test mode)
 
 on:
   push:
@@ -31,6 +31,11 @@ env:
   MAPBOXLAYERNAME: "abc"
   LOGGING: INFO
 
+defaults:
+  run:
+    shell: bash
+    working-directory: dwd-harvester
+
 jobs:
   test-harvest:
     runs-on: ubuntu-latest
@@ -62,7 +67,7 @@ jobs:
         with:
           version: 1.33.0
       - name: build the harvester
-        run: cd dwd-harvester/harvester && docker build --tag code-for-magdeburg/magdeburggiesst-dwd-harvester:test .
+        run: cd harvester && docker build --tag code-for-magdeburg/magdeburggiesst-dwd-harvester:test .
       - name: Start the api
         run: cd api && supabase start && cd ..
       - name: run the harvester
