@@ -56,9 +56,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: docker build test
-        run: docker build --tag "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" .
+        run: docker build --tag "${GITHUB_REPOSITORY}:${GITHUB_REF#refs/heads/}" .
       - name: docker run test
-        run: docker run -v /tmp:/tmp "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" /tmp/out.json
+        run: docker run -v /tmp:/tmp "${GITHUB_REPOSITORY}:${GITHUB_REF#refs/heads/}" /tmp/out.json
       - name: output assertion
         run: |
           FILE="/tmp/out.json"
