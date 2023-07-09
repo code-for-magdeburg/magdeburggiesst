@@ -1,4 +1,4 @@
-name: Pumps CI
+name: OSM Pumps Harvester (prod)
 
 on:
   workflow_dispatch: {}
