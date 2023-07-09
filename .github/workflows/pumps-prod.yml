@@ -1,9 +1,14 @@
-name: OSM Pumps Harvester (prod)
+name: OSM Pumps Harvester (dev)
 
 on:
-  workflow_dispatch: {}
   repository_dispatch:
     types: [pumps_cron]
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+    working-directory: pumps-harvester
 
 jobs:
   pumps:
@@ -11,17 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Aggregate pumps data from open street maps
     steps:
-      - name: Pumps data generate step
-        id: pumps
-        uses: code-for-magdeburg/magdeburggiesst-osm-pumpen-harvester@master
-        with:
-          outfile-path: 'out/pumps.geojson'
-          query: '[out:json][bbox:52.0124,11.4100, 52.2497,11.8330];(node["man_made"="water_well"];);out;>;out;'
-
-      # Use the output from the `pumps` step
-      - name: File output
-        run: echo "The file was written to ${{ steps.pumps.outputs.file }}"
-
+      - name: Get the source
+        uses: actions/checkout@v3
+      - name: build the harvester
+        run: docker build --tag "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" .
+      - name: run the harvester
+        run: docker run -v /tmp:/tmp "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" /tmp/out.json -q "${{ vars.OSM_PUMPS_QUERY }}"
       - name: Upload file to supabase
         run: |
           getStatusCode=$(curl -s -o /dev/null -w "%{http_code}" \
@@ -32,7 +32,7 @@ jobs:
               -X PUT \
               -H "Authorization: Bearer ${{ secrets.SUPABASE_ACCESS_TOKEN }}" \
               -H "Content-Type: application/geo+json" \
-              -d "@${{ steps.pumps.outputs.file }}" \
+              -d "@/tmp/out.json" \
               ${{ vars.SUPABASE_URL }}/storage/v1/object/${{ vars.SUPABASE_DATA_ASSETS_BUCKET }}/pumps.geojson)
             if [ "$putStatusCode" = "200" ]; then
               echo "Uploading to Supabase successful"
@@ -45,7 +45,7 @@ jobs:
               -X POST \
               -H "Authorization: Bearer ${{ secrets.SUPABASE_ACCESS_TOKEN }}" \
               -H "Content-Type: application/geo+json" \
-              -d "@${{ steps.pumps.outputs.file }}" \
+              -d "@/tmp/out.json" \
               ${{ vars.SUPABASE_URL }}/storage/v1/object/${{ vars.SUPABASE_DATA_ASSETS_BUCKET }}/pumps.geojson)
             if [ "$postStatusCode" = "200" ]; then
               echo "Uploading to Supabase successful"
