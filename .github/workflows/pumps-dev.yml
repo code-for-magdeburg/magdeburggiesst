@@ -5,6 +5,9 @@ on:
 #  repository_dispatch:
 #    types: [pumps_cron]
 
+env:
+  OSM_PUMPS_QUERY: {{ vars.OSM_PUMPS_QUERY }}
+
 jobs:
   pumps:
     environment: development
@@ -16,7 +19,7 @@ jobs:
       - name: build the harvester
         run: cd pumps-harvester && docker build --tag "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" .
       - name: run the harvester
-        run: docker run -v /tmp:/tmp "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" /tmp/out.json -q {{ vars.OSM_PUMPS_QUERY }}
+        run: docker run -v /tmp:/tmp "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" /tmp/out.json -q $OSM_PUMPS_QUERY
       - name: Upload file to supabase
         run: |
           getStatusCode=$(curl -s -o /dev/null -w "%{http_code}" \
