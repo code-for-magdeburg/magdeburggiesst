@@ -1,4 +1,4 @@
-name: DWD Radolan Harvester (prod)
+name: DWD Radolan Harvester
 
 on:
   workflow_dispatch: {}
@@ -7,7 +7,7 @@ on:
 
 jobs:
   rain:
-    environment: production
+    environment: "${{ github.event.client_payload.environment }}"
     runs-on: ubuntu-latest
     name: Aggregate rain data from DWD radolan
     steps:

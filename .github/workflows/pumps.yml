@@ -1,9 +1,9 @@
-name: OSM Pumps Harvester (dev)
+name: Update Pumps in Supabase Storage
 
 on:
+  workflow_dispatch:
   repository_dispatch:
     types: [pumps_cron]
-  workflow_dispatch:
 
 defaults:
   run:
@@ -12,7 +12,7 @@ defaults:
 
 jobs:
   pumps:
-    environment: production
+    environment: "${{ github.event.client_payload.environment }}"
     runs-on: ubuntu-latest
     name: Aggregate pumps data from open street maps
     steps:
