@@ -128,7 +128,7 @@ jobs:
           if [ "$getStatusCode" = "200" ]; then
             putStatusCode=$(curl -s -o /dev/null -w "%{http_code}" \
               -X PUT \
-              -H "Authorization: Bearer ${{ secrets.SUPABASE_ACCESS_TOKEN_TEST }}" \
+              -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY_TEST }}" \
               -H "Content-Type: application/geo+json" \
               -d "@${{ steps.pumps.outputs.file }}" \
               ${{ vars.SUPABASE_URL_TEST }}/storage/v1/object/${{ vars.SUPABASE_DATA_ASSETS_BUCKET_TEST }}/pumps.geojson)
@@ -141,7 +141,7 @@ jobs:
           else
             postStatusCode=$(curl -s -o /dev/null -w "%{http_code}" \
               -X POST \
-              -H "Authorization: Bearer ${{ secrets.SUPABASE_ACCESS_TOKEN_TEST }}" \
+              -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY_TEST }}" \
               -H "Content-Type: application/geo+json" \
               -d "@${{ steps.pumps.outputs.file }}" \
               ${{ vars.SUPABASE_URL_TEST }}/storage/v1/object/${{ vars.SUPABASE_DATA_ASSETS_BUCKET_TEST }}/pumps.geojson)

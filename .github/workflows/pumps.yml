@@ -3,6 +3,7 @@ name: Update Pumps in Supabase Storage
 on:
   workflow_dispatch:
   repository_dispatch:
+    # This action can be triggered via Github API webook (see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#repository_dispatch)
     types: [pumps_cron]
 
 defaults:
@@ -11,10 +12,10 @@ defaults:
     working-directory: pumps-harvester
 
 jobs:
-  pumps:
+  collect_pumps:
     environment: "${{ github.event.client_payload.environment }}"
     runs-on: ubuntu-latest
-    name: Aggregate pumps data from open street maps
+    name: A job to aggregate pumps data from open street maps and push to GDK Supabase
     steps:
       - name: Get the source
         uses: actions/checkout@v3
@@ -30,7 +31,7 @@ jobs:
           if [ "$getStatusCode" = "200" ]; then
             putStatusCode=$(curl -s -o /dev/null -w "%{http_code}" \
               -X PUT \
-              -H "Authorization: Bearer ${{ secrets.SUPABASE_ACCESS_TOKEN }}" \
+              -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
               -H "Content-Type: application/geo+json" \
               -d "@/tmp/out.json" \
               ${{ vars.SUPABASE_URL }}/storage/v1/object/${{ vars.SUPABASE_DATA_ASSETS_BUCKET }}/pumps.geojson)
@@ -43,7 +44,7 @@ jobs:
           else
             postStatusCode=$(curl -s -o /dev/null -w "%{http_code}" \
               -X POST \
-              -H "Authorization: Bearer ${{ secrets.SUPABASE_ACCESS_TOKEN }}" \
+              -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
               -H "Content-Type: application/geo+json" \
               -d "@/tmp/out.json" \
               ${{ vars.SUPABASE_URL }}/storage/v1/object/${{ vars.SUPABASE_DATA_ASSETS_BUCKET }}/pumps.geojson)
