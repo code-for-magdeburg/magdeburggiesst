@@ -18,7 +18,7 @@ jobs:
     name: A job to aggregate pumps data from open street maps and push to GDK Supabase
     steps:
       - name: Get the source
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: build the harvester
         run: docker build --tag "${GITHUB_REPOSITORY}:${GITHUB_REF##*/}" .
       - name: run the harvester
