@@ -2,15 +2,6 @@ name: Update Pumps in Supabase Storage
 
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        type: choice
-        description: Environment
-        required: true
-        options:
-          - 'production'
-          - 'development'
-        default: 'production'
   repository_dispatch:
     # This action can be triggered via Github API webook (see https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#repository_dispatch)
     types: [pumps_cron]
@@ -22,12 +13,10 @@ defaults:
 
 jobs:
   collect_pumps:
-    environment: "${{ github.event.client_payload.environment }} || ${{ github.event.inputs.environment }}"
+    environment: "${{ github.event.client_payload.environment }}"
     runs-on: ubuntu-latest
     name: A job to aggregate pumps data from open street maps and push to GDK Supabase
     steps:
-      - name: Print environment
-        run: echo "${{ github.event.client_payload.environment }} || ${{ github.event.inputs.environment }}"
       - name: Get the source
         uses: actions/checkout@v4
       - name: build the harvester
