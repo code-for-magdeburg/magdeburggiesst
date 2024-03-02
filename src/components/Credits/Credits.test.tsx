@@ -25,4 +25,22 @@ describe('component Credits', () => {
     expect(netz39Image).toBeInTheDocument();
     expect(netz39Image.getAttribute('src')).toContain('netz39-logo.svg');
   });
+  test('should render the "Ein Projekt der" label', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <Credits />
+      </ThemeProvider>
+    );
+    const einProjektDerLabel = screen.getByText(/Ein Projekt der/i);
+    expect(einProjektDerLabel).toBeInTheDocument();
+  });
+  test('should render the "Gefördert durch" label', () => {
+    render(
+      <ThemeProvider theme={theme}>
+        <Credits />
+      </ThemeProvider>
+    );
+    const gefoerdertDurchLabel = screen.getByText(/Gefördert durch/i);
+    expect(gefoerdertDurchLabel).toBeInTheDocument();
+  });
 });
